@@ -299,3 +299,4 @@ for (i in 1:250){
   result_aft_bart_np_HTE <- aft_bart_np_HTE()
   save(result_aft_bart_sp_HTE, result_cox_HTE, result_rsf_HTE, result_aft_weibull_HTE, result_aft_lognormal_HTE, result_aft_lognormal_HTE, result_aft_bart_np_HTE, file = paste0("result_scenario_14_",i,".Rdata"))
 }
+
