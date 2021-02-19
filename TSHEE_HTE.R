@@ -69,9 +69,12 @@ TSHEE_HTE <- function(){
   # Test
   bias_ate <- tibble(p1_category = 1:50,
                      true_ate = rnorm(50, 14,0.5),
-                     bias_ate = rnorm(50,0.25,0.05))
+                     bias_ate = rnorm(50,0.25,0.05),
+                     regret = case_when(as.numeric(rbernoulli(50, 0.5)) == 1 ~ rnorm(50, 0.21, 0.04),
+                                        TRUE ~ 0))
   
   # Calculate the bias
+  
   true_ate <- tibble(true_mst_trt_2 = true_mst_trt_2, 
                      true_mst_trt_1 = true_mst_trt_1,
                      p1_category = mydata$p1_category) %>% 
@@ -90,7 +93,8 @@ TSHEE_HTE <- function(){
   
   Bias_ate <- true_ate %>% 
     inner_join(TSHEE_ate) %>% 
-    mutate(bias = true_ate - ate)
+    mutate(bias = true_ate - ate,
+           regret = ifelse(sign(true_ate,) == sign(ate), 0, bias))
   return(bias_ate)
   
 }
