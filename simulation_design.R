@@ -145,3 +145,4 @@ data_gen_censor = function(n=5000, p=10,  PH=TRUE, censor = "20%", setting = 1, 
   
 }
 
+
